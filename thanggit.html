@@ -24,10 +24,7 @@
             <p>My name is Tran Viet Thang. I was an auditor. But with the passion for programming, I'm starting a new road to become a software engineer.</p>
             <p>Find me on <i class="fa fa-facebook"></i>, <i class="fa fa-github"></i></p>
             <h2>New Posts</h2>
-            <span>26 Feb 2018 ></span>
-            <a class="link-sp" href="#">Một số lưu ý khi deploy Next.js app lên heroku</a><br>
-            <span>25 Feb 2018 ></span>
-            <a class="link-sp" href="#">Hello world!</a>
+            <ul id="post"></ul>
             <h2>Categories</h2>
             <p>All <span>(0)</span> </p>
             <h2>Tags</h2>
@@ -37,7 +34,19 @@
             <div class="inline left">Copyright © 2018 Tran Viet Thang</div>
             <div class="inline right">Based on cactus-dark</div>
         </footer>
+        <script>
+            let posts = [
+                { title: "Mot so luu y" },
+                { title: "Hello" },
+                { title: "goodbyw" }
+            ]
 
+            let markup = posts.map(post => {
+                return `<li key="${post.title}"><span><a class="link-sp">${post.title}</a></span></li>`
+            })
+
+            document.getElementById("post").innerHTML = markup.join(" ")
+        </script>
     </div>
 </body>
 </html>
