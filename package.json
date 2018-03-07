@@ -1,0 +1,27 @@
+{
+  "name": "hoc-frontend",
+  "version": "1.0.0",
+  "description": "hello iam thang.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nothing0is0impossible/hoc-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nothing0is0impossible/hoc-frontend/issues"
+  },
+  "homepage": "https://github.com/nothing0is0impossible/hoc-frontend#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.1"
+  }
+}

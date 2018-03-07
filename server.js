@@ -1,7 +1,6 @@
 const express = require("express");
 
 const server = new express();
-
 const port = 9000;
 
 server.use(express.static("public"))
@@ -18,7 +17,7 @@ server.get("/api/posts", (req, res) => {
 })
 
 server.get("/", (req, res) => {
-    res.sendfile(__dirname + "/public/thanggit.html")
+    res.sendFile(__dirname + "/public/thanggit.html")
 })
 
 server.listen(port, (req, res) => {
