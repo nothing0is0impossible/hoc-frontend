@@ -1,8 +1,21 @@
+# Môi trường
+
+- `dev` hay `development` là môi trường phát triển phần mềm.
+
+- `production` là môi trường chạy chính thức của phần mềm.
+
 # Để chạy server trong môi trường dev. Tại thư mục project, run:
 
 `npm run dev`
 
-Tạo 1 server đơn giản với `express`.
+## package.json là file gì?
+`package.json` là file định nghĩa chỉ ra thông tin của project bao gồm tên, liscense, version... và danh sách các thư viện yêu cầu cho project. Chia ra là 2 danh sách
+`devDependencies` và `dependencies`
+
+- `devDependencies` liệt kê danh sách các thư viện hỗ trợ trong lúc triển khai dự án không cần thiết phải có khi dự án được chạy chính thức trên môi trường `production`. Ví dụ `nodemon` là 1 package giúp ta reload server khi có thay đổi về code. Nhưng khi chạy `production` ta không cần tính năng `hot-reload` này.
+- `dependencies` là những thư viện yêu cầu phải có khi chạy trên môi trường `production`. (Ví dụ `express`)
+
+## Tạo 1 server đơn giản với `express`.
 
 ```js
 // import Thư viện sử dụng để tạo server.
@@ -50,7 +63,7 @@ server.listen(port, (req, res) => {
 });
 ```
 
-Client kết nối tới server:
+## Client kết nối tới server:
 
 Ở đây để có thể gọi được yêu cầu đến server và cập nhật thay đổi trang ta cần thực hiện 1 kỹ thuật gọi là `ajax`
 Thư viện `axios` là một trong các thư viện giúp ta thực hiện kỹ thuật này:
@@ -61,20 +74,23 @@ Thư viện `axios` là một trong các thư viện giúp ta thực hiện kỹ
 
 Sau khi import thư viện ta có thể gửi request đến server nhận data và cập nhật lại html:
 
-```
-<script>
-    axios.get("http://localhost:9000/api/posts")
-        .then(res => {
-            if (res.data.success === true) {
-                let posts = res.data.posts
-                let markup = posts.map(post => {
-                    return `<li key="${post.title}"><span><a class="link-sp">${post.title}</a></span></li>`
-                })
-                document.getElementById("post").innerHTML = markup.join(" ")
-            }
-        })
-        .catch(error => {
-            console.log(error)
-        })
-</script>
+```js
+// Gửi request đến server theo api: "/api/posts"
+axios.get("http://localhost:9000/api/posts")
+    .then(res => {
+        if (res.data.success === true) {
+            // sau khi nhận được kết quả trả về từ server liền lưu lại giá trị và tạo ra markup để chuẩn bị cập nhật html.
+            let posts = res.data.posts
+            let markup = posts.map(post => {
+                return `<li key="${post.title}"><span><a class="link-sp">${post.title}</a></span></li>`
+            })
+
+            // cập nhật lại html
+            document.getElementById("post").innerHTML = markup.join(" ");
+        }
+    })
+    .catch(error => {
+        // Hàm xử lý khi request bị lỗi
+        console.log(error)
+    })
 ```
