@@ -7,7 +7,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 </head>
+
 <body>
     <div class="container">
         <header class="header row">
@@ -35,17 +37,19 @@
             <div class="inline right">Based on cactus-dark</div>
         </footer>
         <script>
-            let posts = [
-                { title: "Mot so luu y" },
-                { title: "Hello" },
-                { title: "goodbyw" }
-            ]
-
-            let markup = posts.map(post => {
-                return `<li key="${post.title}"><span><a class="link-sp">${post.title}</a></span></li>`
-            })
-
-            document.getElementById("post").innerHTML = markup.join(" ")
+            axios.get("http://localhost:9000/api/posts")
+                .then(res => {
+                    if (res.data.success === true) {
+                        let posts = res.data.posts
+                        let markup = posts.map(post => {
+                            return `<li key="${post.title}"><span><a class="link-sp">${post.title}</a></span></li>`
+                        })
+                        document.getElementById("post").innerHTML = markup.join(" ")
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })            
         </script>
     </div>
 </body>
